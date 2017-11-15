@@ -35,7 +35,7 @@ for the practical.
 
  If you are having problems pulling docker images, it might be that Docker is trying
  to use Minikube. You can try and reset to factory settings in the Docker settings to
- resolve this issue.
+ resolve this issue. Minikube might fail to start, this might occur if you have multiple drives, you will need to ensure that you run the Minikube commands on the primary drive.
 
  ## Keeping it Clean
 
