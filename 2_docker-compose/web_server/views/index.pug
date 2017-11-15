@@ -1,0 +1,75 @@
+html
+  head
+    title= Machines
+  body
+    table(border="1")
+      tr
+        th= "hostname"
+        th= "type"
+        th= "platform"
+        th= "arch"
+        th= "release"
+        th= "uptime"
+        th= "loadavg"
+        th= "totalmem"
+        th= "freemem"
+        th= "cpus"
+        th= "networkinterfaces"
+      for machine in machines
+        tr
+          td= machine.hostname
+          td= machine.type
+          td= machine.platform
+          td= machine.arch
+          td= machine.release
+          td= machine.uptime
+          td= machine.loadavg
+          td= machine.totalmem
+          td= machine.freemem
+          td
+            table(border="1")
+              tr
+                th= "model"
+                th= "speed"
+                th= "times"
+              for cpu in machine.cpus
+                tr
+                  td= cpu.model
+                  td= cpu.speed
+                  td
+                    table(border="1")
+                      tr
+                        th= "user"
+                        th= "nice"
+                        th= "sys"
+                        th= "idle"
+                        th= "irq"
+                      tr
+                        td= cpu.times.user
+                        td= cpu.times.nice
+                        td= cpu.times.sys
+                        td= cpu.times.idle
+                        td= cpu.times.irq
+          td
+            table(border="1")
+              tr
+                th= "name"
+                th= "details"
+              each val, index in machine.networkinterfaces
+                tr
+                  td= index
+                  td
+                    table(border="1")
+                      tr
+                        th= "address"
+                        th= "netmask"
+                        th= "family"
+                        th= "mac"
+                        th= "internal"
+                      for i in val
+                        tr
+                          td= i.address
+                          td= i.netmask
+                          td= i.family
+                          td= i.mac
+                          td= i.internal
