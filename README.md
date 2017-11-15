@@ -30,3 +30,9 @@ for the practical.
    In your favourite terminal type `minikube start --vm-driver=hyperv`. If everything
    works you should see _Kubectl is now configured to use the cluster._ once it is
    completed. If you get any error messages I would suggest looking [here](www,google.com).
+
+ ## Troubleshooting
+
+ If you are having problems pulling docker images, it might be that Docker is trying
+ to use Minikube. You can try and reset to factory settings in the Docker settings to
+ resolve this issue.
