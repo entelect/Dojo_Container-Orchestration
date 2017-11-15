@@ -36,3 +36,8 @@ for the practical.
  If you are having problems pulling docker images, it might be that Docker is trying
  to use Minikube. You can try and reset to factory settings in the Docker settings to
  resolve this issue.
+
+ ## Keeping it Clean
+
+ Use `docker system prune` to remove dangling images and containers. Just be aware
+ that you could potentially loose data doing this.

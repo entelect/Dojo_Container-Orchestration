@@ -8,16 +8,13 @@ services:
     image: stevenandrewcarter/machine_service
     depends_on:
       - mongo
-    build:
-      context: ./machine_service
-      dockerfile: ./Dockerfile
+    deploy:
+      mode: replicated
+      replicas: 5
 
   web_server:
     image: stevenandrewcarter/web_server
     depends_on:
       - mongo
       - machine_service
-    build:
-      context: ./web_server
-      dockerfile: ./Dockerfile
     ports: ['8080:8080']
