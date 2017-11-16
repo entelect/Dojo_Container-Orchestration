@@ -4,6 +4,9 @@ metadata:
   name: web-server
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: web-server
   template:
     metadata:
       labels:
@@ -11,4 +14,9 @@ spec:
     spec:
       containers:
       - name: web-server
-        image: stevenandrewcarter/machine_service:latest
+        image: stevenandrewcarter/web_server:latest
+        env:
+        - name: MONGODB
+          value: 10.0.0.6
+        ports:
+          - containerPort: 8080

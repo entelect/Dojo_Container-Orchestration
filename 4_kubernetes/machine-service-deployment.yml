@@ -4,6 +4,9 @@ metadata:
   name: machine-service
 spec:
   replicas: 5
+  selector:
+    matchLabels:
+      app: machine-service
   template:
     metadata:
       labels:
@@ -12,3 +15,6 @@ spec:
       containers:
       - name: machine-service
         image: stevenandrewcarter/machine_service:latest
+        env:
+        - name: MONGODB
+          value: 10.0.0.6
