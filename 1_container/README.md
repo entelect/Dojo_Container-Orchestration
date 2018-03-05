@@ -41,6 +41,18 @@ a web page. The flags *-p* indicates what port you should expose on the local ma
 indicates that the container should run in a interactive mode with a TTY. In addition you can provide environment 
 variables, volumes and many other configuration options when running docker commands.
 
+## Optimization
+
+Optimizing Dockerfiles can a huge challenge and can introduce many unexpected problems. In general the idea is to try
+reduce the number of Layers that a Image composes of, by trying to fold RUN, COPY, ADD commands into a single command.
+Additional optimizations can be made by not altering huge amounts of files during the Dockerfile stage, for example
+changing ownership of files will introduce bloated layers. Finally using minimal base images such as _alpine_ based
+images can also reduce the final Image size.
+
+The problem with the above optimizations is that flattening commands, might cause longer builds, since if any of the 
+commands fail the entire layer will be lost. Altering files during build might be unavoidable. Finally, using alpine
+type images might require complicated additional Dockerfile installation steps to include required libraries.
+
 ## Additional Information
 
 The following commands will be helpful for managing the container...
