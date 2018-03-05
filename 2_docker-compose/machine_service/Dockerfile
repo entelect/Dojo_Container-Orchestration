@@ -1,4 +1,4 @@
-FROM node
+FROM node:alpine
 ENV MONGODB=mongo
 ENV INTERVAL=1000
 COPY package.json .

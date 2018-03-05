@@ -1,5 +1,5 @@
 # Indicates the base image that the image will use
-FROM node
+FROM node:alpine
 # Which ports are exposed from the container
 EXPOSE 8080
 # Copy across local files to the container
