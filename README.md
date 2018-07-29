@@ -29,6 +29,18 @@ additional documentation provided.
   once it is completed. If you get any error messages I would suggest looking [here](www,google.com). **Again, not required
   if you have Docker Version 18.02 or above**
 
+### Chocolately Install
+
+If you prefer to use a package manager to install, then install the [chocolately](https://chocolatey.org/) package manager 
+which will then allow you to install the components with the following commands. You can also just install docker for
+windows and switch to edge instead if you don't want to install kubernetes and minikube.
+
+```
+choco install docker-for-windows -y
+choco install kubernetes-cli -y
+choco install minikube -y
+```
+
  ## Troubleshooting
 
  If you are having problems pulling docker images, it might be that Docker is trying to use Minikube. You can try and 
