@@ -1,75 +1,81 @@
+doctype=html
 html
   head
+    meta(http-equiv="refresh" content="5")
     title= Machines
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous")
   body
-    table(border="1")
-      tr
-        th= "hostname"
-        th= "type"
-        th= "platform"
-        th= "arch"
-        th= "release"
-        th= "uptime"
-        th= "loadavg"
-        th= "totalmem"
-        th= "freemem"
-        th= "cpus"
-        th= "networkinterfaces"
+    .container
+      h1 Machines (#{machines.length})
       for machine in machines
-        tr
-          td= machine.hostname
-          td= machine.type
-          td= machine.platform
-          td= machine.arch
-          td= machine.release
-          td= machine.uptime
-          td= machine.loadavg
-          td= machine.totalmem
-          td= machine.freemem
-          td
-            table(border="1")
-              tr
-                th= "model"
-                th= "speed"
-                th= "times"
+        table.table
+          thead.thead-dark
+            tr
+              th= machine.hostname
+          tbody
+            table.table.table-sm
+              thead.thead-light
+                tr
+                  th= "type"
+                  th= "platform"
+                  th= "arch"
+                  th= "release"
+                  th= "uptime"
+                  th= "loadavg"
+                  th= "totalmem"
+                  th= "freemem"
+              tbody
+                tr
+                  td= machine.type
+                  td= machine.platform
+                  td= machine.arch
+                  td= machine.release
+                  td= formatUptime(machine.uptime)
+                  td= formatLoadAverage(machine.loadavg)
+                  td= formatBytes(machine.totalmem)
+                  td= formatBytes(machine.freemem)
+            
+            table.table.table-sm
+              thead.thead-light
+                tr
+                  th= "model"
+                  th= "speed"
+                  th= "user"
+                  th= "nice"
+                  th= "sys"
+                  th= "idle"
+                  th= "irq"
+              tbody
               for cpu in machine.cpus
                 tr
                   td= cpu.model
                   td= cpu.speed
-                  td
-                    table(border="1")
-                      tr
-                        th= "user"
-                        th= "nice"
-                        th= "sys"
-                        th= "idle"
-                        th= "irq"
-                      tr
-                        td= cpu.times.user
-                        td= cpu.times.nice
-                        td= cpu.times.sys
-                        td= cpu.times.idle
-                        td= cpu.times.irq
-          td
-            table(border="1")
-              tr
-                th= "name"
-                th= "details"
-              each val, index in machine.networkinterfaces
+                  td= cpu.times.user
+                  td= cpu.times.nice
+                  td= cpu.times.sys
+                  td= cpu.times.idle
+                  td= cpu.times.irq
+            table.table.table-sm
+              thead.thead-light
                 tr
-                  td= index
-                  td
-                    table(border="1")
-                      tr
-                        th= "address"
-                        th= "netmask"
-                        th= "family"
-                        th= "mac"
-                        th= "internal"
-                      for i in val
-                        tr
-                          td= i.address
-                          td= i.netmask
-                          td= i.family
-                          td= i.mac
-                          td= i.internal
+                  th= "name"
+                  th= "address"
+                  th= "netmask"
+                  th= "family"
+                  th= "mac"
+                  th= "internal"
+              tbody
+              each val, index in machine.networkinterfaces
+                for i in val
+                  tr
+                    td= index
+                    td= i.address
+                    td= i.netmask
+                    td= i.family
+                    td= i.mac
+                    td= i.internal
